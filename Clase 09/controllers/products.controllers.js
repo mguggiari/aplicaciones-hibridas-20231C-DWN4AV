@@ -23,7 +23,32 @@ function getProductById(req, res) {
         })
 }
 
+function createProductFormPage(req, res) {
+    res.send(view.createProductFormPage())
+}
+
+function createProduct(req, res) {
+    const product = {
+        name: req.body.name,
+        price: req.body.price,
+        description: req.body.description
+    }
+
+    service.createProduct(product)
+        .then(function (newProduct) {
+            res.send(view.createPage('Producto creado', `<p>Producto ${newProduct.name} creado con el id ${newProduct.id}</p>`))
+        })
+        .catch(function (error) {
+            res.send(view.createPage('Error', `<p>Ocurrio un error</p>`))
+        })
+
+}
+
+// Modificar y el Eliminar
+
 export {
     getProducts,
-    getProductById
+    getProductById,
+    createProductFormPage,
+    createProduct
 }
