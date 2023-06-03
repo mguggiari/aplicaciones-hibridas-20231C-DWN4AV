@@ -6,13 +6,11 @@ import { useEffect, useState } from 'react'
 
 function ProductList({list}){
     const [products, setProducts] = useState(list)
-    //const [filterText, setFilterText] = useState("")
 
     const onChangeFilter = (event) =>{
-        //setFilterText(event.target.value)
         const filterText = event.target.value.toLowerCase()
         const listFilter = list.filter(product => product.name.toLowerCase().includes(filterText))
-        setProducts(listFilter) // fuerza el render
+        setProducts(listFilter)
     }
 
     useEffect(()=>{

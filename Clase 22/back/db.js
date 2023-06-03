@@ -10,9 +10,6 @@ client.connect()
         console.log("Coneccion exitosa!")
 
         db.collection("otra").insertOne({ name: "Node! otro dato!" })
-
-
-
     })
     .catch(function () {
         console.log("Coneccion incorrecta...")
