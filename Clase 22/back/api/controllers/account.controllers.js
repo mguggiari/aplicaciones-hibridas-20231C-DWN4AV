@@ -1,4 +1,5 @@
 import * as services from '../../services/account.service.js'
+import * as tokenService from '../../services/token.service.js'
 
 async function createAccount(req, res) {
     return services.createAccount(req.body)
@@ -12,15 +13,32 @@ async function createAccount(req, res) {
 
 async function login(req, res) {
     return services.login(req.body)
-        .then((account) => {
-            res.status(201).json({ message: "Cuenta encontrada con exito.", account })
+        .then(async (account) => {
+            return { token: await tokenService.createToken(account), account }
+        })
+        .then((auth) => {
+            res.status(200).json(auth)
         })
         .catch((err) => {
             res.status(400).json({ error: { message: err.message } })
         })
 }
 
+async function logout(req, res) {
+    const token = req.headers['auth-token']
+
+    return tokenService.removeToken(token)
+        .then(() => {
+            res.status(200).json({ message: "Sesion cerrada correctamente." })
+        })
+        .catch((err) => {
+            res.status(400).json({ error: { message: err.message } })
+        })
+}
+
+
 export {
     createAccount,
-    login
+    login,
+    logout
 }
