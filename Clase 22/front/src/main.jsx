@@ -8,11 +8,13 @@ import {createBrowserRouter, RouterProvider } from 'react-router-dom'
 import HomePage from './pages/HomePage'
 import ProductListPage from './pages/products/ProductsListPage'
 import ProductDetailsPage from './pages/products/ProductDetailsPage'
+import LoginPage from './pages/LoginPage'
+import RoutePrivate from './components/RoutePrivate'
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <App />,
+    element: <RoutePrivate><App /></RoutePrivate>,
     errorElement: <Error404Page />,
     children: [
       {
@@ -30,6 +32,10 @@ const router = createBrowserRouter([
 
     ]
   },
+  {
+    path: '/login',
+    element: <LoginPage />
+  }
   
 ])
 
