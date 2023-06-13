@@ -1,0 +1,22 @@
+.main-nav-list{
+    display: flex;
+    justify-content: center;
+    background-color: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.main-nav-list__link{
+    display: block;
+    font-size: 1.2rem;
+    padding: 15px 30px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #000;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.main-nav-list__link:hover{
+    color: #fff;
+    background-color: #000;
+}
