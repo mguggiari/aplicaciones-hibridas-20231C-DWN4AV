@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import './ProductListItem.css'
 
-
 function ProductListItem({product}){
     return (
         <li className='product-list-item' >

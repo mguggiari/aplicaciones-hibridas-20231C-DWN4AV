@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import './LoginPage.css'
 import authService from '../services/auth.service'
 
@@ -10,31 +10,29 @@ function LoginPage(){
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
 
-    const onChangeUserName = (event) => {
+    const onChangeUserName = useCallback((event) => {
         setUserName(event.target.value)
-    }
+    }, [setUserName])
 
-    const onChangePassword = (event) => {
+    const onChangePassword = useCallback((event) => {
         setPassword(event.target.value)
-    }
+    }, [setPassword])
 
-    const onSubmit = (event) => {
+    const onSubmit = useCallback((event) => {
         event.preventDefault()
 
         authService.login({userName, password})
         .then(({account, token}) => {
             console.log("Session iniciada", {account, token})
             setError('')
-
             localStorage.setItem('token', token)
-
             navigate('/', {replace: true})
            
         })
         .catch(err => {
             setError(err.error.message)
         })
-    }
+    }, [userName, password, navigate, setError])
 
 
     return (
